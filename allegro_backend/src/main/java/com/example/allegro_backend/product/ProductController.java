@@ -62,6 +62,7 @@ public class ProductController {
 
     @GetMapping("/api/products/newest")
     List<Product> findNewestProducts() {
+        System.out.println("someone wants to get newest products");
         return productRepository.findNewestProducts();
     }
 

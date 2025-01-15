@@ -123,7 +123,7 @@ public class ProductRepository {
     }
 
     public List<Product> getProductsWithDiscount() {
-        return jdbcClient.sql("SELECT * FROM ProductTable WHERE discount > 0 DESC LIMIT 6")
+        return jdbcClient.sql("SELECT * FROM ProductTable WHERE discount > 0 ORDER BY discount DESC LIMIT 6")
                 .query(Product.class)
                 .list();
     }
