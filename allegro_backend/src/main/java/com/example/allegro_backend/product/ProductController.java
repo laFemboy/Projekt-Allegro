@@ -24,7 +24,6 @@ public class ProductController {
 
     @GetMapping("/api/products/{id}")
     Product findProductById(@PathVariable Integer id, HttpServletRequest request) {
-        System.out.println("Request received from: " + request.getRemoteAddr());
         Optional<Product> product = productRepository.findById(id);
         if (product.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found");
