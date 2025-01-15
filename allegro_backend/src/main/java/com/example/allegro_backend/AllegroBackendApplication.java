@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AllegroBackendApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AllegroBackendApplication.class, args);
+
+        SpringApplication.run(AllegroBackendApplication.class, args
+        );
     }
 
 }
