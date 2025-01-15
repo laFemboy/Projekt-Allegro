@@ -85,4 +85,46 @@ public class ProductRepository {
         Assert.state(updated == 1, "Failed to delete product with id "
                 +id);
     }
+
+    public List<Product> findNewestProducts() {
+        return jdbcClient.sql("SELECT * FROM ProductTable ORDER BY dateAdded DESC LIMIT 6")
+                .query(Product.class)
+                .list();
+    }
+
+    public List<Product> findMostViewedProducts() {
+        return jdbcClient.sql("SELECT * FROM ProductTable ORDER BY viewCount DESC LIMIT 6")
+                .query(Product.class)
+                .list();
+    }
+
+    public List<Product> findProductsByCategory(ProductCategory category) {
+        return jdbcClient.sql("SELECT * FROM ProductTable WHERE category = :category")
+                .param("category", category.name())
+                .query(Product.class)
+                .list();
+    }
+
+    public List<Product> findProductsByQuery(String query) {
+        return jdbcClient.sql("SELECT * FROM ProductTable WHERE name LIKE :query")
+                .param("query", "%"+query+"%")
+                .query(Product.class)
+                .list();
+    }
+
+    public void incrementViewCount(Integer id) {
+        Optional<Product> product = findById(id);
+        if (product.isEmpty()) {
+            throw new IllegalArgumentException("Product not found");
+        }
+        Product updatedProduct = product.get();
+        updatedProduct.setViewCount(updatedProduct.getViewCount() + 1);
+        update(id, updatedProduct);
+    }
+
+    public List<Product> getProductsWithDiscount() {
+        return jdbcClient.sql("SELECT * FROM ProductTable WHERE discount > 0 DESC LIMIT 6")
+                .query(Product.class)
+                .list();
+    }
 }

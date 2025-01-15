@@ -59,4 +59,34 @@ public class ProductController {
         }
         productRepository.delete(id);
     }
+
+    @GetMapping("/api/products/newest")
+    List<Product> findNewestProducts() {
+        return productRepository.findNewestProducts();
+    }
+
+    @GetMapping("/api/products/most-viewed")
+    List<Product> findMostViewedProducts() {
+        return productRepository.findMostViewedProducts();
+    }
+
+    @GetMapping("/api/products/category/{category}")
+    List<Product> findProductsByCategory(@PathVariable ProductCategory category) {
+        return productRepository.findProductsByCategory(category);
+    }
+
+    @GetMapping("/api/products/search/{query}")
+    List<Product> findProductsByQuery(@PathVariable String query) {
+        return productRepository.findProductsByQuery(query);
+    }
+
+    @GetMapping("/api/products/{id}/increment-view-count")
+    void incrementViewCount(@PathVariable Integer id) {
+        productRepository.incrementViewCount(id);
+    }
+
+    @GetMapping("/api/products/discounted")
+    List<Product> getProductsWithDiscount() {
+        return productRepository.getProductsWithDiscount();
+    }
 }

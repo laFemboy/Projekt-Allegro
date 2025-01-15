@@ -89,6 +89,9 @@ export function SignUpForm() {
         <Button type="submit" className="w-full">
           Sign Up
         </Button>
+        <Button type = "button" variant='outline' className="w-full max-w-sm p-4 mx-auto rounded-lg shadow-md space-y-4" onClick={() => window.location.href = '/auth'}>
+            Already have an account? Sign In
+        </Button>
       </form>
     </Form>
   );
