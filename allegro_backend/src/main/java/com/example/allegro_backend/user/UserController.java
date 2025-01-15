@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
     private final UserRepository userRepository;
 
@@ -27,6 +28,8 @@ public class UserController {
 
     @PostMapping("/api/users/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody UserCredentials userCredentials) {
+        // check if method is working
+        System.out.println("authenticateUser method is working");
         Optional<User> optionalUser = userRepository.getUserByUsername(userCredentials.getUsername());
 
         if (optionalUser.isPresent() && optionalUser.get().getPassword().equals(userCredentials.getPassword())) {
